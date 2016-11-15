@@ -1,36 +1,24 @@
-# include "exparith_unary.hpp"
+#include "exparith_unary.hpp"
 
+#include <assert.h>
+#define NDEBUG 1
 
-# include <assert.h>
-# define NDEBUG 1
+using namespace std;
 
+std::string const sign_exp = "exp";
 
-using namespace std ; 
+std::string const sign_log = "log";
 
-
-
-std :: string const sign_exp = "exp" ;
-
-std :: string const sign_log = "log" ;
-
-
-
-double Op_Unary :: eval ( Evaluation_Context & ec ) const { 
-  return NAN ;
+double Op_Unary::eval(Evaluation_Context &ec) const {
+  return this->compute(this->argument->eval(ec));
 }
 
-
-string Op_Unary :: toString () const { 
-  return * ( string * ) NULL ;
+string Op_Unary::toString() const {
+  return this->sign + " ( " + this->argument->toString() + " ) ";
 }
 
+#define COMPUTE_UNARY(class, op)                                               \
+  double class ::compute(double x) const { return op(x); }
 
-# define COMPUTE_UNARY( class , op )		\
-  double class :: compute ( double x ) const {	\
-    return op ( x ) ;				\
-  }
-
-
-COMPUTE_UNARY ( Exp , exp ) 
-COMPUTE_UNARY ( Log, log ) 
-
+COMPUTE_UNARY(Exp, exp)
+COMPUTE_UNARY(Log, log)
