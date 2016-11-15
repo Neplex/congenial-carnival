@@ -11,12 +11,25 @@ std::string const sign_mul = "*";
 std::string const sign_div = "/";
 
 double Op_Binary::eval(Evaluation_Context &ec) const {
-  return this->compute(this->left->eval(ec), this->right->eval(ec));
+  double l = left->eval(ec);
+  double r = right->eval(ec);
+  return this->compute(l, r);
 }
 
 string Op_Binary::toString() const {
-  return this->left->toString() + " " + this->sign + " " +
-         this->left->toString();
+  std::string res = "";
+  if (left->get_priority() < get_priority()) {
+    res += "( " + left->toString() + " )";
+  } else {
+    res += left->toString();
+  }
+  res += " " + sign + " ";
+  if (right->get_priority() < get_priority()) {
+    res += "( " + right->toString() + " )";
+  } else {
+    res += right->toString();
+  }
+  return res;
 }
 
 #define COMPUTE_BINARY(class, op)                                              \

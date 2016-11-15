@@ -12,9 +12,13 @@ void Evaluation_Context_No_Variable::valuate(string const &id, double value) {
 }
 
 double Evaluation_Context_Simple::get_value(string const &id) {
-  return valuation.find(id)->second;
+  if (valuation.find(id) == valuation.end()) {
+    return NAN;
+  } else {
+    return valuation[id];
+  }
 }
 
 void Evaluation_Context_Simple::valuate(string const &id, double value) {
-  valuation.insert(pair<string, double>(id, value));
+  valuation[id] = value;
 }

@@ -18,5 +18,5 @@ double Set::eval(Evaluation_Context &ec) const {
 }
 
 string Set::toString() const {
-  return variable->toString() + sign_set + value->toString();
+  return variable->toString() + " " + sign_set + " " + value->toString();
 }

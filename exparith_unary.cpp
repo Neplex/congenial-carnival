@@ -14,7 +14,7 @@ double Op_Unary::eval(Evaluation_Context &ec) const {
 }
 
 string Op_Unary::toString() const {
-  return this->sign + " ( " + this->argument->toString() + " ) ";
+  return this->sign + " ( " + this->argument->toString() + " )";
 }
 
 #define COMPUTE_UNARY(class, op)                                               \
