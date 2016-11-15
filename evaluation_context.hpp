@@ -18,22 +18,29 @@
 # include <assert.h>
 
 
-/*! Abstract class used to provide a context for evaluation.
+/*! 
+ * Abstract class used to provide a context for evaluation.
  * In particular, it manages the value of variables.
  */
 class Evaluation_Context {
 public :
-  /* Retrieve the value of a variable.
+  
+  /*! 
+   * Retrieve the value of a variable.
    * \param id Variable name.
    * \return the value associated to \c id or NAN if undefined.
    */
+  
   virtual double get_value ( std :: string const & id ) = 0 ;
-  /* Retrieve the value of a variable.
+
+  /*!
+   * Set the value of a variable.
    * \param id Variable name.
-   * \return the value associated to \c id or NAN if undefined.
+   * \param value Value to associate to the variable.
    */
   virtual void valuate ( std :: string const & id ,
 			 double value ) = 0 ;
+
   /*! Destructor. */
   virtual ~ Evaluation_Context () {} ;
 } ;
@@ -41,13 +48,14 @@ public :
 
 
 /*!
- * Concrete instance used when no variable should be involved. 
+ * Concrete instance used when no variable should be used. 
  */
 class Evaluation_Context_No_Variable
   : public Evaluation_Context {
 public :
   /*! It is asserted that this method is not used. */
   double get_value ( std :: string const & id ) ;
+  /*! It is asserted that this method is not used. */
   void valuate ( std :: string const & id ,
 		 double value ) ;
 } ;
