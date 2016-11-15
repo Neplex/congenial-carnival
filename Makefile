@@ -6,7 +6,7 @@
 TDM_NUMBER := 07
 
 MODULE = evaluation_context exparith exparith_unary exparith_binary exparith_variable loader_evaluator
-TEST_NAME := exparith loader_evaluator
+TEST_NAME := enonce exparith loader_evaluator
 
 SHELL := bash
 
@@ -17,8 +17,9 @@ SHELL := bash
 help : 
 	@echo "Available:"
 	@echo "- K => compilation (should not produce any error nor warning)"
-	@echo "- T1 / M1 => compilation and test (outpout/memory) test_exparith"
-	@echo "- T2 / M2 => compilation and test (outpout/memory) test_loader_evaluator"
+	@echo "- T1 / M1 => compilation and test (outpout/memory) test_enonce"
+	@echo "- T2 / M2 => compilation and test (outpout/memory) test_exparith"
+	@echo "- T3 / M3 => compilation and test (outpout/memory) test_loader_evaluator"
 	@echo "- T    => all test on output"
 	@echo "- M    => all test on memory"
 	@echo "- pack => produce the tgz archive"
@@ -80,10 +81,13 @@ T_% : test_%
 M_% : test_%
 	$(VALGRIND) ./test_$* > /dev/null
 
-M1: M_exparith
-M2 : M_loader_evaluator
-T1: T_exparith
-T2 : T_loader_evaluator
+T1: T_enonce
+T2: T_exparith
+T3 : T_loader_evaluator
+
+M1: M_enonce
+M2: M_exparith
+M3 : M_loader_evaluator
 
 T : $(TEST_NAME:%=T_%)
 
