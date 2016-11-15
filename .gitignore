@@ -27,3 +27,8 @@
 *.exe
 *.out
 *.app
+
+test_enonce
+test_exparith
+test_loader_evaluator
+*_out.txt
